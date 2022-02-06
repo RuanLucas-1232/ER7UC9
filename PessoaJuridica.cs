@@ -2,8 +2,8 @@ namespace ER7UC9
 {
     public class PessoaJuridica : Pessoa
     {
-        public string cnpj { get; set; }
-        public string RazaoSocial { get; set; }
+        public string? cnpj { get; set; }
+        public string? RazaoSocial { get; set; }
         public override double PagarImposto(float Salario)
         {
             if (Salario == 1903.99)
@@ -37,6 +37,22 @@ namespace ER7UC9
             else
             {
                 return false;
+            }
+        }
+
+        public bool armazenarPJ(PessoaJuridica pj)
+        {
+            string caminho = $@"C:\Users\Pc\Desktop\Projetos C#\Projetos Curso Senai\Nova pasta\ER7UC9\UsuariosPJ\{pj.RazaoSocial}.csv";
+            StreamWriter sw = new StreamWriter(caminho);
+            sw.WriteLine($"Nome: {pj.nome}\nRazão Social: {pj.RazaoSocial}\nCNPJ: {pj.cnpj}\nLocalização: {pj.Localizacao}");
+            sw.Close();
+            using (StreamReader sr = new StreamReader(caminho))
+            {
+                if (sr.ReadToEnd() == null)
+                {
+                    return false;
+                }
+                return true;
             }
         }
     }

@@ -3,7 +3,7 @@ namespace ER7UC9
     public class PessoaFisica : Pessoa
     {
 
-        public string cpf { get; set; }
+        public string? cpf { get; set; }
         public DateTime dataNascimento { get; set; }
         public bool ValidarDataNascimento(DateTime DataNascimento)
         {
@@ -31,6 +31,21 @@ namespace ER7UC9
             {
                 Console.WriteLine("SUA RENDA É BAIXA");
                 return 0;
+            }
+        }
+        public bool armazenarPF(PessoaFisica pf)
+        {
+            string caminho = $@"C:\Users\Pc\Desktop\Projetos C#\Projetos Curso Senai\Nova pasta\ER7UC9\UsuariosPF\{pf.nome}.csv";
+            StreamWriter sw = new StreamWriter(caminho);
+            sw.WriteLine($"Nome: {pf.nome}\nCpf: {pf.cpf}\nData de Nascimento: {pf.dataNascimento}\nLocalização: {pf.Localizacao}");
+            sw.Close();
+            using (StreamReader sr = new StreamReader(caminho))
+            {
+                if (sr.ReadToEnd == null)
+                {
+                    return false;
+                }
+                return true;
             }
         }
     }

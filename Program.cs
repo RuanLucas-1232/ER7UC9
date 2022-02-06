@@ -74,16 +74,14 @@ namespace ER7UC9
                         Console.WriteLine($"INSIRA O COMPLEMENTO. CASO NÃO TENHA DIGITE nenhum");
                         localidade.Complemento = Console.ReadLine();
 
-                        UsuarioPessoaFisica.Localizacao = localidade;
+                        UsuarioPessoaFisica.Localizacao = $"{localidade.Logradouro}, {localidade.Numero}, {localidade.Complemento}";
 
                         if (IdadeValidada == true)
                         {
                             Console.WriteLine($"Acesso Permitido!");
 
-                            List<PessoaFisica> PessoasFisicas = new List<PessoaFisica>()
-                            {
-                                new PessoaFisica(){nome = UsuarioPessoaFisica.nome, dataNascimento = UsuarioPessoaFisica.dataNascimento, cpf = UsuarioPessoaFisica.cpf, Localizacao = UsuarioPessoaFisica.Localizacao}
-                            };
+                            UsuarioPessoaFisica.armazenarPF(UsuarioPessoaFisica);
+                            
                             Console.WriteLine($"DIGITE SEU SALÁRIO. USE (.) AO INVÉS DE (,):");
                             float salarioPJ = float.Parse(Console.ReadLine());
 
@@ -131,7 +129,7 @@ namespace ER7UC9
                         Console.WriteLine("DIGITE O SEU NÚMERO:");
                         localidade.Numero = int.Parse(Console.ReadLine());
 
-                        UsuarioPessoaJuridica.Localizacao = localidade;
+                        UsuarioPessoaJuridica.Localizacao = $"{localidade.Logradouro}, {localidade.Numero}, {localidade.Complemento}";
 
                         bool cnpjValidado = ValidadorPessoaJuridica.validarCnpj(UsuarioPessoaJuridica.cnpj);
 
@@ -139,12 +137,7 @@ namespace ER7UC9
                         {
                             Console.WriteLine("CADASTRO REALIZADO COM SUCESSO");
 
-                            List<PessoaJuridica> PessoasJuridicas = new List<PessoaJuridica>()
-                            {
-                                new PessoaJuridica(){nome = UsuarioPessoaJuridica.nome, RazaoSocial = UsuarioPessoaJuridica.RazaoSocial, cnpj = UsuarioPessoaJuridica.cnpj, Localizacao = UsuarioPessoaJuridica.Localizacao}
-                            };
-                            Console.WriteLine(PessoasJuridicas);
-
+                            UsuarioPessoaJuridica.armazenarPJ(UsuarioPessoaJuridica);
 
                             Console.WriteLine($"DIGITE SEU SALÁRIO. USE (.) AO INVÉS DE (,):");
                             float salarioPJ = float.Parse(Console.ReadLine());
